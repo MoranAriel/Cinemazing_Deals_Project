@@ -11,11 +11,13 @@ public class AdminFacade extends ClientFacade{
 
     public AdminFacade() {
         System.out.println("Welcome Admin!");
+
     }
 
     @Override
     public boolean login(String email, String password) {
         return LoginManager.adminLogin(email, password);
+
     }
 
     public void addCompany(Company company){

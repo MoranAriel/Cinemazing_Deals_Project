@@ -11,6 +11,11 @@ public class CompanyFacade extends ClientFacade{
 
     private int companyID;
 
+    public CompanyFacade() {
+        System.out.println("Welcome Company!");
+        this.companyID = companyID;
+    }
+
     public CompanyFacade(int companyID) {
         System.out.println("Welcome Company!");
         this.companyID = companyID;

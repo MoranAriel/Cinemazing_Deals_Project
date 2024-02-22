@@ -12,6 +12,11 @@ public class CustomerFacade extends ClientFacade{
 
     private int customerID;
 
+    public CustomerFacade() {
+        System.out.println("Welcome Customer!");
+        this.customerID = customerID;
+    }
+
     public CustomerFacade(int customerID) {
         System.out.println("Welcome Customer!");
         this.customerID = customerID;

@@ -26,20 +26,36 @@ public class LoginManager {
     }
 
     private LoginManager() {
-//TODO: set up login manager
+
     }
 
     public ClientFacade login(String email, String password, ClientType clientType) {
-      if (clientType == ClientType.Administrator && adminLogin(email, password)){
-          return new AdminFacade();
-      }if (clientType == ClientType.Company && companyLogin(email, password)){
-          return new CompanyFacade(CompanyFacade.getIdThroughLogin(email, password));
-      }if (clientType == ClientType.Customer && customerLogin(email, password)){
-          return new CustomerFacade(CustomerFacade.getIdThroughLogin(email, password));
-      }else {
-          return null;
+        switch (clientType) {
+            case Administrator:
+                AdminFacade adminFacade = new AdminFacade();
+                if (adminFacade.login(email, password))
+                    return adminFacade;
+            case Company:
+                CompanyFacade companyFacade = new CompanyFacade();
+                if (companyFacade.login(email, password))
+                    return companyFacade;
+            case Customer:
+                CustomerFacade customerFacade = new CustomerFacade();
+                if (customerFacade.login(email, password))
+                    return customerFacade;
         }
-    }
+        return null;
+        }
+//      if (clientType == ClientType.Administrator && adminLogin(email, password)){
+//          return new AdminFacade();
+//      }if (clientType == ClientType.Company && companyLogin(email, password)){
+//          return new CompanyFacade(CompanyFacade.getIdThroughLogin(email, password));
+//      }if (clientType == ClientType.Customer && customerLogin(email, password)){
+//          return new CustomerFacade(CustomerFacade.getIdThroughLogin(email, password));
+//      }else {
+//          return null;
+//        }
+
 
     public static boolean customerLogin(String email, String password) {
         CustomersDAO customersDAO = new CustomersDBDAO(ConnectionPool.getInstance());

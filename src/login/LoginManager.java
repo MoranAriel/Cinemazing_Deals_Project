@@ -5,6 +5,7 @@ import dao.CompaniesDBDAO;
 import dao.CustomersDAO;
 import dao.CustomersDBDAO;
 import database.ConnectionPool;
+import exceptions.LoginFailException;
 import facade.AdminFacade;
 import facade.ClientFacade;
 import facade.CompanyFacade;
@@ -29,21 +30,35 @@ public class LoginManager {
 
     }
 
-    public ClientFacade login(String email, String password, ClientType clientType) {
+    public ClientFacade login(String email, String password, ClientType clientType){
+           ClientFacade clientFacade;
         switch (clientType) {
-            case Administrator:
-                AdminFacade adminFacade = new AdminFacade();
-                if (adminFacade.login(email, password))
-                    return adminFacade;
-            case Company:
-                CompanyFacade companyFacade = new CompanyFacade();
-                if (companyFacade.login(email, password))
-                    return companyFacade;
-            case Customer:
-                CustomerFacade customerFacade = new CustomerFacade();
-                if (customerFacade.login(email, password))
-                    return customerFacade;
-        }
+               case Administrator:
+                   clientFacade = new AdminFacade();
+                   if (clientFacade.login(email, password)){
+                       System.out.println("Welcome Admin!");
+                       clientFacade = new AdminFacade(true);
+                       return clientFacade;
+                   }
+                   else System.out.println("There was a problem with your email and/or password!");
+                   break;
+               case Company:
+                   clientFacade = new CompanyFacade();
+                   if (clientFacade.login(email, password)) {
+                       System.out.println("Welcome Company!");
+                       return clientFacade;
+                   }
+                   else System.out.println("There was a problem with your email and/or password!");
+                   break;
+               case Customer:
+                   clientFacade = new CustomerFacade();
+                   if (clientFacade.login(email, password)) {
+                       System.out.println("Welcome Customer!");
+                       return clientFacade;
+                   }
+                   else System.out.println("There was a problem with your email and/or password!");
+                   break;
+           }
         return null;
         }
 //      if (clientType == ClientType.Administrator && adminLogin(email, password)){
@@ -67,7 +82,4 @@ public class LoginManager {
         return companiesDAO.isCompanyExists(email, password);
     }
 
-    public static boolean adminLogin(String email, String password) {
-        return email.equals("admin@admin.com") && password.equals("admin");
-    }
 }

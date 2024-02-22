@@ -94,7 +94,7 @@ public class CustomersDBDAO implements CustomersDAO {
 //                    "`PASSWORD` = '" + customer.getPassword() + "' " +
 //                    "WHERE (`ID` = '" + customer.getId() + "')";
             String query = "UPDATE " + DBManager.DB + ".`customers`" +
-                    " SET FIRST_NAME = ?,LAST_NAME = ?, EMAIL = ?, PASSWORD = ?, WHERE ID = ?;";
+                    " SET FIRST_NAME = ?,LAST_NAME = ?, EMAIL = ?, PASSWORD = ?, WHERE (ID = ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getLastName());

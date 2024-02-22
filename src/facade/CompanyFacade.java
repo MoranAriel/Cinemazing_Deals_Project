@@ -12,12 +12,10 @@ public class CompanyFacade extends ClientFacade{
     private int companyID;
 
     public CompanyFacade() {
-        System.out.println("Welcome Company!");
         this.companyID = companyID;
     }
 
     public CompanyFacade(int companyID) {
-        System.out.println("Welcome Company!");
         this.companyID = companyID;
     }
 
@@ -27,10 +25,7 @@ public class CompanyFacade extends ClientFacade{
 
     @Override
     public boolean login(String email, String password) {
-      if (!companiesDAO.isCompanyExists(email, password)) {
-        throw new RuntimeException("Company does not exist");
-      }
-        return true;
+      return companiesDAO.isCompanyExists(email, password);
     }
 
     public static int getIdThroughLogin(String email, String password){

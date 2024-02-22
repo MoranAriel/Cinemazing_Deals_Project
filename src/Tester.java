@@ -26,9 +26,18 @@ public class Tester {
         Company company2 = new Company("Cinema City", "cinemacity@gmail.com","cinemacity");
         Company company3 = new Company("Hot Cinema", "hotcinema@gmail.com","hotcinema");
         Company company4 = new Company("Movie Land", "movieland@gmail.com","movieland");
+        Company company5 = new Company("Globus Max", "globusmax#@", "globsd");
+        Company company6 = new Company("blah blah","blah blah blah", "blah");
 
-        System.out.println();
 
+      /*  companiesDAO.addCompany(company);
+        companiesDAO.addCompany(company2);
+        companiesDAO.addCompany(company3);
+        companiesDAO.addCompany(company4);
+
+*/
+
+        companiesDAO.deleteCompany(1);
 
      /* companiesDAO.addCompany(company);
       companiesDAO.addCompany(company2);

@@ -6,8 +6,7 @@ import beans.Category;
 import beans.Company;
 import beans.Coupon;
 import beans.Customer;
-import dao.CompaniesDAO;
-import dao.CompaniesDBDAO;
+import dao.*;
 import database.ConnectionPool;
 import database.DBManager;
 import facade.CompanyFacade;
@@ -20,23 +19,30 @@ public class Tester {
 
         DBManager.createDataBase();
         CompaniesDAO companiesDAO = new CompaniesDBDAO(ConnectionPool.getInstance());
-        CompanyFacade companyFacade = new CompanyFacade(1);
+        CustomersDAO customersDAO = new CustomersDBDAO(ConnectionPool.getInstance());
+        CouponsDAO couponsDAO = new CouponsDBDAO(ConnectionPool.getInstance());
 
-        Company company = new Company("Doron's Company", "doronbrgr@yahoo.com", "maiden666");
-        Company company2 = new Company("Avital's Company", "avitalbrgr@yahoo.com", "avi920berger");
-
-        Customer customer = new Customer("Doron", "Berger", "doronbrgr@gmail.com", "MillieB0423");
-
-        Coupon coupon = new Coupon(1, Category.MOVIES,"1+1","Get one ticket for free", LocalDate.now(),LocalDate.of(2024,6,24),10,20.0,"image");
-
-        companiesDAO.addCompany(company);
-        companiesDAO.addCompany(company2);
-
-        LoginManager loginManager = LoginManager.getInstance();
-
-        System.out.println(loginManager.login(company.getEmail(), company.getPassword(), ClientType.Company));
+        Company company = new Company("Yes Plant", "yesplanet@gmail.com","yesplanet");
+        Company company2 = new Company("Cinema City", "cinemacity@gmail.com","cinemacity");
+        Company company3 = new Company("Hot Cinema", "hotcinema@gmail.com","hotcinema");
+        Company company4 = new Company("Movie Land", "movieland@gmail.com","movieland");
 
 
+
+
+     /* companiesDAO.addCompany(company);
+      companiesDAO.addCompany(company2);
+        companiesDAO.addCompany(company3);
+       companiesDAO.addCompany(company4);*/
+
+       // companiesDAO.addCompany(company3);
+
+       // companiesDAO.getOneCompany(4).setEmail("globusmax@gmail.com");
+       // companiesDAO.getOneCompany(4).setName("globusmax");
+
+     //   companiesDAO.updateCompany(companiesDAO.getOneCompany(4));
+
+   //   companiesDAO.deleteCompany(3);
 
     }
 }

@@ -24,7 +24,7 @@ public class DBManager {
     public static final String SQL_PASS = "12345678";
 
     //DataBase
-    public static final String DB = "`hey ho let's go`";
+    public static final String DB = "`cinemazing_deals`";
 
     //general method to create schemas or tables.
     public static void createX(String str) {

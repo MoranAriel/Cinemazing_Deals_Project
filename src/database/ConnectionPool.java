@@ -12,7 +12,7 @@ public class ConnectionPool {
     private final Stack<Connection> connections = new Stack<>();
 
     private ConnectionPool() throws SQLException {
-        System.out.println("We create new connection pool instance");
+        System.out.println("Hasta La Vista, Baby!");
         openAllConnections();
     }
 

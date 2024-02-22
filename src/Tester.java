@@ -27,7 +27,7 @@ public class Tester {
         Company company3 = new Company("Hot Cinema", "hotcinema@gmail.com","hotcinema");
         Company company4 = new Company("Movie Land", "movieland@gmail.com","movieland");
 
-
+        System.out.println();
 
 
      /* companiesDAO.addCompany(company);

@@ -24,7 +24,7 @@ public class CompaniesDBDAO implements CompaniesDAO {
 
   // Implement methods from CompaniesDAO interface
   @Override
-  // V
+
   public boolean isCompanyExists(String email, String password) {
     Connection connection = null;
     boolean result = false;
@@ -118,7 +118,6 @@ public class CompaniesDBDAO implements CompaniesDAO {
 //  }
 
   @Override
-  // V
   public List<Company> getAllCompanies() {
     Connection connection = null;
     List<Company> result = new ArrayList<>();

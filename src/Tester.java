@@ -3,6 +3,7 @@
 import java.util.Scanner;
 
 import database.DBManager;
+import exceptions.LoginFailException;
 import login.ClientType;
 import login.LoginManager;
 
@@ -43,6 +44,10 @@ public class Tester {
         System.out.println("Enter Password: ");
         password = scanner.nextLine();
 
-        loginManager.login(email, password, clientType);
+        try {
+            loginManager.login(email, password, clientType);
+        } catch (LoginFailException e) {
+            System.out.println(e.getMessage());;
+        }
     }
 }

@@ -30,7 +30,7 @@ public class LoginManager {
 
     }
 
-    public ClientFacade login(String email, String password, ClientType clientType){
+    public ClientFacade login(String email, String password, ClientType clientType) throws LoginFailException{
            ClientFacade clientFacade;
         switch (clientType) {
                case Administrator:
@@ -40,36 +40,24 @@ public class LoginManager {
                        clientFacade = new AdminFacade(true);
                        return clientFacade;
                    }
-                   else System.out.println("There was a problem with your email and/or password!");
-                   break;
+                   else throw new LoginFailException("Admin Login Failed. Problem with Email or Password.");
                case Company:
                    clientFacade = new CompanyFacade();
                    if (clientFacade.login(email, password)) {
                        System.out.println("Welcome Company!");
                        return clientFacade;
                    }
-                   else System.out.println("There was a problem with your email and/or password!");
-                   break;
+                   else throw new LoginFailException("Company Login Failed. Problem with Email or Password.");
                case Customer:
                    clientFacade = new CustomerFacade();
                    if (clientFacade.login(email, password)) {
                        System.out.println("Welcome Customer!");
                        return clientFacade;
                    }
-                   else System.out.println("There was a problem with your email and/or password!");
-                   break;
+                   else throw new LoginFailException("Customer Login Failed. Problem with Email or Password.");
            }
         return null;
         }
-//      if (clientType == ClientType.Administrator && adminLogin(email, password)){
-//          return new AdminFacade();
-//      }if (clientType == ClientType.Company && companyLogin(email, password)){
-//          return new CompanyFacade(CompanyFacade.getIdThroughLogin(email, password));
-//      }if (clientType == ClientType.Customer && customerLogin(email, password)){
-//          return new CustomerFacade(CustomerFacade.getIdThroughLogin(email, password));
-//      }else {
-//          return null;
-//        }
 
 
     public static boolean customerLogin(String email, String password) {

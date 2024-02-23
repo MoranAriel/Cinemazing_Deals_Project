@@ -105,16 +105,6 @@ public class CompaniesDBDAO implements CompaniesDAO {
         }
     }
 
-//  // TODO: update this method to delete company from database
-    //V
-//  private void removeCompanyFromList(int companyID) {
-//    // for (Company company : companies) {
-//    //   if (companyID == company.getId()) {
-//    //     companies.remove(company);
-//    //     break;
-//    //   }
-//    // }
-//  }
 
     @Override
     public List<Company> getAllCompanies() {
@@ -142,8 +132,6 @@ public class CompaniesDBDAO implements CompaniesDAO {
         return result;
     }
 
-    // TODO: update this method to get company from database
-    // V
     @Override
     public Company getOneCompany(int companyID) {
         Connection connection = null;

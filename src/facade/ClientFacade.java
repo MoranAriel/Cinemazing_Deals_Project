@@ -17,4 +17,6 @@ public abstract class ClientFacade {
 
     public abstract boolean login(String email, String password);
 
+    public  abstract int getIdThroughLogin(String email, String password);
+
 }

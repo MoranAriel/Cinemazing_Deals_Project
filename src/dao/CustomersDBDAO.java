@@ -24,14 +24,7 @@ public class CustomersDBDAO implements CustomersDAO {
 
     @Override
     public boolean isCustomerExists(String email, String password) {
-//        boolean result = false;
-//        for (Customer customer:customers){
-//            if (email.equals(customer.getEmail()) && password.equals(customer.getPassword())){
-//                result = true;
-//            }
-//        }
-//        return result;
-//    }
+
         Connection connection = null;
         boolean result = false;
 
@@ -87,14 +80,8 @@ public class CustomersDBDAO implements CustomersDAO {
 
         try {
             connection = connectionPool.getConnection();
-//            String query = "UPDATE " + DBManager.DB
-//                    + ".`customers` SET `FIRST_NAME` = '" + customer.getFirstName() + "', " +
-//                    "`LAST_NAME` = '" + customer.getLastName() + "', " +
-//                    "`EMAIL` = '" + customer.getEmail() + "', " +
-//                    "`PASSWORD` = '" + customer.getPassword() + "' " +
-//                    "WHERE (`ID` = '" + customer.getId() + "')";
             String query = "UPDATE " + DBManager.DB + ".`customers`" +
-                    " SET FIRST_NAME = ?,LAST_NAME = ?, EMAIL = ?, PASSWORD = ?, WHERE (ID = ?)";
+                    " SET `FIRST_NAME` = ?, `LAST_NAME` = ?, `EMAIL` = ?, `PASSWORD` = ? WHERE (`ID` = ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getLastName());
@@ -118,22 +105,12 @@ public class CustomersDBDAO implements CustomersDAO {
             String query = "DELETE FROM " + DBManager.DB + ".`customers` WHERE (`ID` = '" + customerID + "')";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.execute();
-//            removeCustomerFromList(customerID);
         } catch (InterruptedException | SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             connectionPool.restoreConnection(connection);
         }
     }
-    // TODO: update this method to delete customer from database
-//    private void removeCustomerFromList(int customerID) {
-//        for (Customer customer:customers){
-//            if (customerID == customer.getId()){
-//                customers.remove(customer);
-//                break;
-//            }
-//        }
-//    }
 
     @Override
     public List<Customer> getAllCustomers() {
@@ -162,25 +139,15 @@ public class CustomersDBDAO implements CustomersDAO {
         return result;
     }
 
-    // TODO: update this method to get CUSTOMER from database
     @Override
     public Customer getOneCustomer(int customerID) {
-//        Customer desiredCustomer = null;
-//        for (Customer customer : customers) {
-//            if (customerID == customer.getId()) {
-//                desiredCustomer = customer;
-//                break;
-//            }
-//        }
-//        return desiredCustomer;
-//    }
+
         Connection connection = null;
         Customer result = new Customer();
 
-
         try {
             connection = connectionPool.getConnection();
-            String query = "SELECT * FROM " + DBManager.DB + ".`customers`";
+            String query = "SELECT * FROM " + DBManager.DB + ".`customers` WHERE (`ID` = '" + customerID + "')";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -196,8 +163,5 @@ public class CustomersDBDAO implements CustomersDAO {
             connectionPool.restoreConnection(connection);
         }
         return result;
-
-
-
     }
 }

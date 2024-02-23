@@ -28,7 +28,7 @@ public class CouponsDBDAO implements CouponsDAO {
                     "(company_id,category_id,title,description,start_date,end_date,amount,price,image) " +
                     "VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            PreparedStatement preparedStatement = connection.prepareStatement(DBManager.ADD_COUPON);
+
             preparedStatement.setInt(1, coupon.getCompanyID());
             preparedStatement.setInt(2, coupon.getCategory().getId());
             preparedStatement.setString(3, coupon.getTitle());

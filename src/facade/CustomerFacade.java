@@ -21,7 +21,7 @@ public class CustomerFacade extends ClientFacade{
         this.customerID = customerID;
     }
 
-    public static int getIdThroughLogin(String email, String password) {
+    public  int getIdThroughLogin(String email, String password) {
         int id = 0;
         for (Customer customer: UserLists.getAllCustomers()){
             if (customer.getEmail().equals(email) && customer.getPassword().equals(password)){

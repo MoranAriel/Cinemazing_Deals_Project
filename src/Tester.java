@@ -2,6 +2,9 @@
 
 import java.util.Scanner;
 
+import beans.Customer;
+import dao.CustomersDBDAO;
+import database.ConnectionPool;
 import database.DBManager;
 import exceptions.LoginFailException;
 import login.ClientType;
@@ -10,8 +13,8 @@ import login.LoginManager;
 public class Tester {
 
     public static void main(String[] args){
-
         testAll();
+
     }
 
     public static void testAll(){

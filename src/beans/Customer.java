@@ -11,6 +11,7 @@ public class Customer {
   private String email;
   private String password;
   private List<Coupon> coupons;
+  private static int counter = 1;
 
   public Customer(){
 
@@ -29,20 +30,24 @@ public class Customer {
 
   public Customer(String firstName, String lastName, String email,
       String password) {
+    this.id = counter;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
     this.coupons = new ArrayList<>();
+    counter++;
   }
 
   public Customer(String firstName, String lastName, String email,
                   String password, List<Coupon> coupons) {
+    this.id = counter;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
     this.coupons = coupons;
+    counter++;
   }
 
 

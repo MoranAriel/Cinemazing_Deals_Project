@@ -45,6 +45,7 @@ public class LoginManager {
                    clientFacade = new CompanyFacade();
                    if (clientFacade.login(email, password)) {
                        System.out.println("Welcome Company!");
+                       clientFacade = new CompanyFacade(email, password);
                        return clientFacade;
                    }
                    else throw new LoginFailException("Company Login Failed. Problem with Email or Password.");

@@ -2,10 +2,10 @@ package login;
 
 public enum ClientType {
 
-    Default(0),
-    Administrator(1),
-    Company(2),
-    Customer(3);
+    DEFAULT(0),
+    ADMINISTRATOR(1),
+    COMPANY(2),
+    CUSTOMER(3);
 
     private int id;
 

@@ -33,7 +33,7 @@ public class LoginManager {
     public ClientFacade login(String email, String password, ClientType clientType) throws LoginFailException{
            ClientFacade clientFacade;
         switch (clientType) {
-               case Administrator:
+            case ADMINISTRATOR:
                    clientFacade = new AdminFacade();
                    if (clientFacade.login(email, password)){
                        System.out.println("Welcome Admin!");
@@ -41,7 +41,7 @@ public class LoginManager {
                        return clientFacade;
                    }
                    else throw new LoginFailException("Admin Login Failed. Problem with Email or Password.");
-               case Company:
+            case COMPANY:
                    clientFacade = new CompanyFacade();
                    if (clientFacade.login(email, password)) {
                        System.out.println("Welcome Company!");
@@ -49,7 +49,7 @@ public class LoginManager {
                        return clientFacade;
                    }
                    else throw new LoginFailException("Company Login Failed. Problem with Email or Password.");
-               case Customer:
+            case CUSTOMER:
                    clientFacade = new CustomerFacade();
                    if (clientFacade.login(email, password)) {
                        System.out.println("Welcome Customer!");

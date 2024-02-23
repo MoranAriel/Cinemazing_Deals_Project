@@ -25,7 +25,7 @@ public class Tester {
         int input = 0;
         String email;
         String password;
-        ClientType clientType = ClientType.Default;
+        ClientType clientType = ClientType.DEFAULT;
 
         while (input!=1 && input!=2 && input!=3) {
             System.out.println("Enter Client Type: " +
@@ -36,9 +36,9 @@ public class Tester {
             scanner.nextLine();
 
             switch (input) {
-                case 1 -> clientType = ClientType.Administrator;
-                case 2 -> clientType = ClientType.Company;
-                case 3 -> clientType = ClientType.Customer;
+                case 1 -> clientType = ClientType.ADMINISTRATOR;
+                case 2 -> clientType = ClientType.COMPANY;
+                case 3 -> clientType = ClientType.CUSTOMER;
                 default -> System.out.println("There's a Problem with your input. Please Try Again.");
             }
         }

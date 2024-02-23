@@ -1,10 +1,13 @@
 package beans;
 
 public enum Category {
-  MOVIES(1),
+  NEW_GEAR(1),
   RENTAL_GEAR(2),
-  NEW_GEAR(3),
-  PRODUCTION(4);
+  PRODUCTION(3),
+  POST_PRODUCTION(4),
+  MOVIE_THEATERS(5),
+  STREAMING(6),
+  DVD_AND_BLURAY(7);
 
   private int id;
 

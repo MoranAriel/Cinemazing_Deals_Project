@@ -57,6 +57,13 @@ public class DBManager {
         createTable(CREATE_TABLE_CUSTOMERS);
         createTable(CREATE_TABLE_COUPONS);
         createTable(CREATE_TABLE_CUSTOMERS_VS_COUPONS);
+        addCategory(ADD_CATEGORY, "New Gear");
+        addCategory(ADD_CATEGORY, "Rental Gear");
+        addCategory(ADD_CATEGORY, "Production");
+        addCategory(ADD_CATEGORY, "Post Production");
+        addCategory(ADD_CATEGORY, "Movie Theaters");
+        addCategory(ADD_CATEGORY, "Streaming");
+        addCategory(ADD_CATEGORY, "DVD and Bluray");
     }
 
     //string for creating schema
@@ -110,13 +117,25 @@ public class DBManager {
             " `COUPON_ID` INT NOT NULL," +
             " PRIMARY KEY (`CUSTOMER_ID`, `COUPON_ID`))";
 
+    public static void addCategory (String add, String spec){
+        Connection connection = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(add);
+            preparedStatement.setString(1,spec);
+            preparedStatement.execute();
+        } catch (InterruptedException | SQLException e) {
+            System.out.println(e.getMessage());
+            ;
+        } finally {
+            ConnectionPool.getInstance().restoreConnection(connection);
+        }
+    }
+
     //CRUD
 
-    public static final String ADD_COMPANY = "INSERT INTO " + DB + ".`companies` " +
-            "(name,email,password) VALUES(?,?,?)";
-
-    public static final String ADD_CUSTOMER = "INSERT INTO " + DB + ".`customers` " +
-            "(first_name,last_name,email,password) VALUES(?,?,?,?)";
+    public static final String ADD_CATEGORY = "INSERT INTO " + DB + ".`categories` " +
+            "(name) VALUES(?)";
 
     public static final String ADD_COUPON = "INSERT INTO " + DB + ".`coupons` " +
             "(company_id,category_id,title,description,start_date,end_date,amount,price,image) " +

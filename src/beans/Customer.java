@@ -14,7 +14,7 @@ public class Customer {
   private static int counter = 1;
 
   public Customer(){
-
+    this.coupons = new ArrayList<>();
   }
 
   public Customer(int id, String firstName, String lastName, String email,

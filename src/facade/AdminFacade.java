@@ -140,7 +140,7 @@ public class AdminFacade extends ClientFacade {
                     int cusId = s.nextInt();
                     s.nextLine();
 
-                    System.out.println(getOneCompany(cusId));
+                    System.out.println(getOneCustomer(cusId));
                     break;
 
                 case 0: //exit system

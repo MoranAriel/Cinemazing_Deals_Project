@@ -3,12 +3,15 @@ package dao;
 import beans.Category;
 import beans.Company;
 import beans.Coupon;
+import beans.Customer;
 import database.ConnectionPool;
 import database.DBManager;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CouponsDBDAO implements CouponsDAO {
 
@@ -155,7 +158,6 @@ public class CouponsDBDAO implements CouponsDAO {
 
         try {
             connection = connectionPool.getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement(DBManager.ADD_CUSTOMER_VS_COUPON);
             String query = "INSERT INTO " + DBManager.DB + ".`customers_vs_coupons` " +
                     "(customer_id,coupon_id) VALUES(?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -185,5 +187,39 @@ public class CouponsDBDAO implements CouponsDAO {
         } finally {
             connectionPool.restoreConnection(connection);
         }
+    }
+
+    public Map<Integer, ArrayList<Integer>> getCouponPurchaseHistory(List<Customer> customers){
+        Connection connection = null;
+        Map<Integer, ArrayList<Integer>> couponPurchaseHistory = new HashMap<>();
+        ArrayList<Integer> customerList = new ArrayList<>();
+        for (Customer customer:customers){
+            int id = customer.getId();
+            customerList.add(id);
+        }
+        try {
+            connection = connectionPool.getConnection();
+            String query = "SELECT * FROM " + DBManager.DB + ".`customers_vs_coupons`";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            for (Integer customer:customerList){
+                ArrayList<Integer> purchasedCoupons = new ArrayList<>();
+                while (resultSet.next()){
+                    if (customer == resultSet.getInt("CUSTOMER_ID")){
+                    purchasedCoupons.add(resultSet.getInt("COUPON_ID"));
+                    }
+                }
+
+                couponPurchaseHistory.put(customer, purchasedCoupons);
+                resultSet = preparedStatement.executeQuery();
+            }
+
+
+        } catch (InterruptedException | SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            connectionPool.restoreConnection(connection);
+        }
+        return couponPurchaseHistory;
     }
 }

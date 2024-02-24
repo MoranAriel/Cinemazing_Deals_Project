@@ -23,7 +23,7 @@ public class CompanyFacade extends ClientFacade {
         System.out.println("ID Number: " + getCompanyID());
         Company thisCompany = getCompanyDetails();
         List<Coupon> companyCoupons = getCompanyCoupons();
-        thisCompany.getCoupons().addAll(companyCoupons);
+        thisCompany.setCoupons(companyCoupons);
 
 
         while (true){

@@ -1,6 +1,7 @@
 package beans;
 
 public enum Category {
+  DEAFAULT(0),
   NEW_GEAR(1),
   RENTAL_GEAR(2),
   PRODUCTION(3),
@@ -19,4 +20,7 @@ public enum Category {
     return id;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
 }

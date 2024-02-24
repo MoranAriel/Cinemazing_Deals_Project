@@ -14,6 +14,7 @@ public class Coupon {
   private int amount;
   private double price;
   private String image;
+  private static int counter = 1;
 
   public Coupon(){
 
@@ -21,6 +22,7 @@ public class Coupon {
   public Coupon(int companyID, Category category, String title,
       String description, LocalDate startDate, LocalDate endDate,
       int amount, double price, String image) {
+    this.id = counter;
     this.companyID = companyID;
     this.category = category;
     this.title = title;
@@ -30,6 +32,7 @@ public class Coupon {
     this.amount = amount;
     this.price = price;
     this.image = image;
+    counter++;
   }
 
   public Coupon(int id, int companyID, Category category, String title,
@@ -67,8 +70,24 @@ public class Coupon {
     return category;
   }
 
-  public void setCategory(Category category) {
+  public void setCategory(Category category){
     this.category = category;
+  }
+
+  public void setCategory(int id) {
+    Category newCategory = Category.DEAFAULT;
+
+        switch (id) {
+            case 1 -> newCategory = Category.NEW_GEAR;
+            case 2 -> newCategory = Category.RENTAL_GEAR;
+            case 3 -> newCategory = Category.PRODUCTION;
+            case 4 -> newCategory = Category.POST_PRODUCTION;
+            case 5 -> newCategory = Category.MOVIE_THEATERS;
+            case 6 -> newCategory = Category.STREAMING;
+            case 7 -> newCategory = Category.DVD_AND_BLURAY;
+            default -> System.out.println("There was a problem with your input, please try again.");
+    }
+    this.category = newCategory;
   }
 
   public String getTitle() {

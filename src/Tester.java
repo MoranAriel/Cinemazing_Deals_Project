@@ -2,7 +2,9 @@
 
 import java.util.Scanner;
 
+import beans.Category;
 import beans.Customer;
+import dao.CouponsDBDAO;
 import dao.CustomersDBDAO;
 import database.ConnectionPool;
 import database.DBManager;
@@ -14,7 +16,6 @@ public class Tester {
 
     public static void main(String[] args){
         testAll();
-
     }
 
     public static void testAll(){

@@ -12,6 +12,7 @@ public class Company {
   private static int counter = 1;
 
   public Company() {
+    this.coupons = new ArrayList<>();
   }
 
   public Company(int id, String name, String email,

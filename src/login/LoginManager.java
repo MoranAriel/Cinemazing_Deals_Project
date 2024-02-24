@@ -30,45 +30,32 @@ public class LoginManager {
 
     }
 
-    public ClientFacade login(String email, String password, ClientType clientType) throws LoginFailException{
-           ClientFacade clientFacade;
+    public ClientFacade login(String email, String password, ClientType clientType) throws LoginFailException {
+        ClientFacade clientFacade;
         switch (clientType) {
             case ADMINISTRATOR:
-                   clientFacade = new AdminFacade();
-                   if (clientFacade.login(email, password)){
-                       System.out.println("Welcome Admin!");
-                       clientFacade = new AdminFacade(true);
-                       return clientFacade;
-                   }
-                   else throw new LoginFailException("Admin Login Failed. Problem with Email or Password.");
+                clientFacade = new AdminFacade();
+                if (clientFacade.login(email, password)) {
+                    System.out.println("Welcome Admin!");
+                    clientFacade = new AdminFacade(true);
+                    return clientFacade;
+                } else throw new LoginFailException("Admin Login Failed. Problem with Email or Password.");
             case COMPANY:
-                   clientFacade = new CompanyFacade();
-                   if (clientFacade.login(email, password)) {
-                       System.out.println("Welcome Company!");
-                       clientFacade = new CompanyFacade(email, password);
-                       return clientFacade;
-                   }
-                   else throw new LoginFailException("Company Login Failed. Problem with Email or Password.");
+                clientFacade = new CompanyFacade();
+                if (clientFacade.login(email, password)) {
+                    System.out.println("Welcome Company!");
+                    clientFacade = new CompanyFacade(email, password);
+                    return clientFacade;
+                } else throw new LoginFailException("Company Login Failed. Problem with Email or Password.");
             case CUSTOMER:
-                   clientFacade = new CustomerFacade();
-                   if (clientFacade.login(email, password)) {
-                       System.out.println("Welcome Customer!");
-                       return clientFacade;
-                   }
-                   else throw new LoginFailException("Customer Login Failed. Problem with Email or Password.");
-           }
-        return null;
+                clientFacade = new CustomerFacade();
+                if (clientFacade.login(email, password)) {
+                    System.out.println("Welcome Customer!");
+                    clientFacade = new CustomerFacade(email, password);
+                    return clientFacade;
+                } else throw new LoginFailException("Customer Login Failed. Problem with Email or Password.");
         }
-
-
-    public static boolean customerLogin(String email, String password) {
-        CustomersDAO customersDAO = new CustomersDBDAO(ConnectionPool.getInstance());
-        return customersDAO.isCustomerExists(email, password);
-    }
-
-    public static boolean companyLogin(String email, String password) {
-        CompaniesDAO companiesDAO = new CompaniesDBDAO(ConnectionPool.getInstance());
-        return companiesDAO.isCompanyExists(email, password);
+        return null;
     }
 
 }

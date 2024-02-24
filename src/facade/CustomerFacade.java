@@ -7,23 +7,26 @@ import database.UserLists;
 import login.LoginManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerFacade extends ClientFacade{
 
     private int customerID;
 
     public CustomerFacade() {
-        this.customerID = customerID;
     }
 
-    public CustomerFacade(int customerID) {
-
-        this.customerID = customerID;
+    public CustomerFacade(String email, String password) {
+        this.customerID = getIdThroughLogin(email, password);
+        System.out.println("ID Number: "+getCustomerID());
+        Customer thisCustomer = getCustomerDetails();
+        List<Coupon> customerCoupons = getCustomerCoupons();
+        thisCustomer.getCoupons().addAll(customerCoupons);
     }
 
-    public  int getIdThroughLogin(String email, String password) {
+    public int getIdThroughLogin(String email, String password) {
         int id = 0;
-        for (Customer customer: UserLists.getAllCustomers()){
+        for (Customer customer: customersDAO.getAllCustomers()){
             if (customer.getEmail().equals(email) && customer.getPassword().equals(password)){
                 id = customer.getId();
             }
@@ -37,7 +40,7 @@ public class CustomerFacade extends ClientFacade{
 
     @Override
     public boolean login(String email, String password) {
-        return LoginManager.customerLogin(email, password);
+        return customersDAO.isCustomerExists(email, password);
     }
 
     public void purchaseCoupon(Coupon coupon){

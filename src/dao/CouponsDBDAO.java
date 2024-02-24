@@ -101,11 +101,11 @@ public class CouponsDBDAO implements CouponsDAO {
                 Coupon coupon = new Coupon();
                 coupon.setId(resultSet.getInt("ID"));
                 coupon.setCompanyID((resultSet.getInt("COMPANY_ID")));
-                Category.valueOf(resultSet.getString("CATEGORY_ID"));
+                coupon.setCategory((resultSet.getInt("CATEGORY_ID")));
                 coupon.setTitle(resultSet.getString("TITLE"));
                 coupon.setDescription(resultSet.getString("DESCRIPTION"));
                 coupon.setStartDate(resultSet.getDate("START_DATE").toLocalDate());
-                coupon.setStartDate(resultSet.getDate("END_DATE").toLocalDate());
+                coupon.setEndDate(resultSet.getDate("END_DATE").toLocalDate());
                 coupon.setAmount((resultSet.getInt("AMOUNT")));
                 coupon.setPrice(resultSet.getInt("PRICE"));
                 coupon.setImage(resultSet.getString("IMAGE"));
@@ -126,17 +126,17 @@ public class CouponsDBDAO implements CouponsDAO {
 
         try {
             connection = connectionPool.getConnection();
-            String query = "SELECT * FROM " + DBManager.DB + ".`coupons`";
+            String query = "SELECT * FROM " + DBManager.DB + ".`coupons` WHERE (`ID` = '"+couponID+"')";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 result.setId(resultSet.getInt("ID"));
                 result.setCompanyID(resultSet.getInt("COMPANY_ID"));
-                Category.valueOf(resultSet.getString("CATEGORY_ID"));
+                result.setCategory((resultSet.getInt("CATEGORY_ID")));
                 result.setTitle(resultSet.getString("TITLE"));
                 result.setDescription(resultSet.getString("DESCRIPTION"));
                 result.setStartDate(resultSet.getDate("START_DATE").toLocalDate());
-                result.setStartDate(resultSet.getDate("END_DATE").toLocalDate());
+                result.setEndDate(resultSet.getDate("END_DATE").toLocalDate());
                 result.setAmount(resultSet.getInt("AMOUNT"));
                 result.setPrice(resultSet.getInt("PRICE"));
                 result.setImage(resultSet.getString("IMAGE"));
@@ -147,7 +147,6 @@ public class CouponsDBDAO implements CouponsDAO {
             connectionPool.restoreConnection(connection);
         }
         return result;
-
     }
 
     @Override

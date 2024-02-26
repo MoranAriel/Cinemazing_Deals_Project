@@ -12,6 +12,8 @@ import static java.lang.System.exit;
 
 public class AdminFacade extends ClientFacade {
 
+    private boolean keepRunning = true;
+
     public AdminFacade() {
 
     }
@@ -144,7 +146,6 @@ public class AdminFacade extends ClientFacade {
                     break;
 
                 case 0: //exit system
-                    s.close();
                     exit();
                     break;
 
@@ -156,8 +157,8 @@ public class AdminFacade extends ClientFacade {
     }
 
     private void exit() {
-        System.out.println("Goodbye");
-        System.exit(0);
+       keepRunning = false;
+       LoginManager.testAll();
     }
 
     private void menu() {

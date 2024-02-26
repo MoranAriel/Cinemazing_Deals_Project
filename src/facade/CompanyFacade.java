@@ -47,7 +47,7 @@ public class CompanyFacade extends ClientFacade {
                     System.out.println("6. Streaming");
                     System.out.println("7. DVD and Bluray");
 
-                    category = Category.DEAFAULT;
+                    category = Category.DEFAULT;
                     categoryNum = s.nextInt();
                     s.nextLine();
                     category.setId(categoryNum);
@@ -264,7 +264,7 @@ public class CompanyFacade extends ClientFacade {
     }
 
     public Category switchCategory(int id){
-        Category newCategory = Category.DEAFAULT;
+        Category newCategory = Category.DEFAULT;
 
         switch (id) {
             case 1 -> newCategory = Category.NEW_GEAR;
@@ -273,7 +273,7 @@ public class CompanyFacade extends ClientFacade {
             case 4 -> newCategory = Category.POST_PRODUCTION;
             case 5 -> newCategory = Category.MOVIE_THEATERS;
             case 6 -> newCategory = Category.STREAMING;
-            case 7 -> newCategory = Category.DVD_AND_BLURAY;
+            case 7 -> newCategory = Category.DVD_AND_BLUERAY;
             default -> System.out.println("There was a problem with your input, please try again.");
         }
         return newCategory;
